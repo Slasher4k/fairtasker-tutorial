@@ -14,6 +14,13 @@ html {
   min-width: 300px;
 }
 
+.tlc-width > a:first-child > div {
+  margin-top: 0;
+}
+.tlc-width > a:last-child > div {
+  margin-bottom: 0;
+}
+
 a {
     text-decoration: none;   
   }
