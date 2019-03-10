@@ -10,6 +10,9 @@ import { NavLink } from 'react-router-dom';
 
 import Avatar from "@material-ui/core/Avatar";
 import Moment from "moment";
+import LocationSVG from "@material-ui/icons/PlaceOutlined";
+import DateSVG from "@material-ui/icons/EventOutlined";
+import TimeSVG from "@material-ui/icons/WatchLaterOutlined";
 
 const styles = {
     root: {
@@ -54,15 +57,39 @@ const styles = {
     avatar: {
         width: 34,
         height: 34,
-        float: 'right'
-    }
+        float: 'right',
+    },
+    active:{
+        position: 'relative',
+        display: 'block',
+        '& > div':{
+            boxShadow: 'none'
+        },
+        '&::after':{
+            content: "' '",
+            position: 'absolute',
+            top: 0,
+            border: '1px solid #00c9ff',
+            boxShadow: '0 0 1px 1px rgba(2, 165, 209, .29)',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            display: 'block',
+            borderRadius: '4px',
+            width: '100%'
+        }        
+    },
+    smallSVG: {
+        fontSize: 16,
+        verticalAlign: 'middle'
+    } 
 }
 
 const TaskCard = ({ task, classes }) => {
     console.log(classes);
         
-    return (         <Card classes={{ root: classes.root }} className={task.status}>
-        <NavLink to={task.id}>
+    return (<NavLink to={'/'+task.id} activeClassName={classes.active}>
+         <Card classes={{ root: classes.root }} className={task.status}>
             <CardContent>
                 <div className={classes.heading}>
                     <Typography variant="subtitle1" component="span">
@@ -75,13 +102,13 @@ const TaskCard = ({ task, classes }) => {
                 <div className='content'>
                     <Avatar className={classes.avatar}>{task.postedBy.firstName[0]}</Avatar>
                     <Typography variant="caption">
-                        {`${task.location.city}, ${task.location.state}`}
+                        <LocationSVG className={classes.smallSVG} /> {`${task.location.city}, ${task.location.state}`}
                     </Typography>
                     <Typography variant="caption">
-                        {Moment(task.date).format('ddd, D MMM')}
+                        <DateSVG className={classes.smallSVG} /> {Moment(task.date).format('ddd, D MMM')}
                     </Typography>
                     <Typography variant="caption">
-                        {task.time.length > 4 ? task.time : task.time.join(', ')}
+                        <TimeSVG className={classes.smallSVG} /> {task.time.length > 4 ? task.time : task.time.join(', ')}
                     </Typography>
                 </div>
                 <hr />
@@ -89,8 +116,8 @@ const TaskCard = ({ task, classes }) => {
                     <span className="status">{task.status}</span> - 1 offers
             </Typography>
             </CardContent>
-        </NavLink>
         </Card>
+        </NavLink>
      );
 }
  
