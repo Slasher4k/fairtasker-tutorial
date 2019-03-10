@@ -1,0 +1,56 @@
+.taskDetailsTop {
+    display: flex;
+    flex-direction: column;
+}
+
+.taskStatus {
+    border-radius: 10px;
+    padding: 2px 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.taskStatus.Open {
+    background-color: #e5f0d9;
+    color: #7db343;
+}
+
+.taskStatus.Completed {
+    background-color: #c4edff;
+    color: #1339c5;
+}
+
+.taskStatus.Assigned {
+    background-color: #f8ffbc;
+    color: #ffd400;
+    
+}
+
+.taskDetailsTop .title {
+    margin: 16px 0px 12px;    
+}
+
+.budget {
+    border: 1px solid rgb(187, 194, 220);
+    border-radius: 6px;
+    padding: 7px 10px 10px;
+}
+
+.taskDetailsTop .amount {
+    margin: 10px 0 13px 0;
+}
+
+@media screen and (min-width: 1280px) {
+    .taskDetailsTop {
+        flex-direction: row;
+    }
+
+    .taskDetailsTop .topLeft {
+        flex-grow: 1;
+        padding-right: 1em;
+    }
+
+    .taskDetailsTop .topRight {
+        flex-basis: 200px;
+    }
+}

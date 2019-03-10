@@ -1,0 +1,45 @@
+.wrapper {
+
+    padding: .75em 0;
+    position: relative;   
+}
+
+.wrapper:nth-child(4)::after {
+     display: block;
+     position: absolute;
+     content: " ";
+     background-color: #eff1f5;
+     height: 1px;
+     width: 100%;
+     bottom: 0px;
+ }
+
+.wrapper:nth-child(4)::before {
+     display: block;
+     position: absolute;
+     content: " ";
+     background-color: #eff1f5;
+     height: 1px;
+     width: 100%;
+     top: 0px;
+ }
+
+.detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapper .heading {
+    font-size: 0.75rem
+}
+
+.iconContainer {
+    float: left;
+    margin: 7px 16px 0 0;
+    line-height: 38px;
+}
+
+.iconContainer svg{
+     fill: #545a77;
+ }

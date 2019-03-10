@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 import Avatar from "@material-ui/core/Avatar";
 import Moment from "moment";
 import LocationSVG from "@material-ui/icons/PlaceOutlined";
-import DateSVG from "@material-ui/icons/EventOutlined";
+import DateSVG from "@material-ui/icons/Event";
 import TimeSVG from "@material-ui/icons/WatchLaterOutlined";
 
 const styles = {
@@ -43,7 +43,8 @@ const styles = {
             fontSize: 11
         },
         '& .content span': {
-            color: '#545a77'
+            color: '#545a77',
+            margin: '3px 0'
         },
         '& > div:first-of-type': {
             padding: "6px 12px"

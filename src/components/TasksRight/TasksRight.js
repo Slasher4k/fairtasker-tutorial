@@ -6,9 +6,12 @@ import TaskDetails from './TaskDetails/TaskDetails';
 import Grid from '@material-ui/core/Grid';
 
 const TasksRight = ({ task, visible, width }) => {
-    const display = visible ? {} : { display: 'none' } 
+    const styles = visible ? {} : { display: 'none' } 
 
-    return (<Grid item xs={width} className='i-scroll' style={display}>
+    styles.backgroundColor = 'white';
+    // styles.zIndex = '-1';
+
+    return (<Grid item xs={width} className='i-scroll' style={styles}>
         { task ? <TaskDetails task={task} /> : <TasksMap /> }         
     </Grid> );
 }
