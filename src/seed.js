@@ -22,14 +22,12 @@ const getStatus = (status) => {
 
 const getTime = (times) => {
     let time = [];
-    switch (times) {
-        case 0: time = 'Anytime';
-                break;       
+    switch (times) { 
         case 4: time.unshift('Night');
         case 3: time.unshift('Afternoon');
         case 2: time.unshift('Lunch');
-        case 1: time.unshift('Morning');
-        default:  break;
+        case 1: time.unshift('Morning'); break;
+        default: time = 'Anytime'; break;
     }
 
     return time;
@@ -60,8 +58,11 @@ iterateSeries(tasks, (i, callback) => {
         axios.post(tasksurl, {
             title: `Task ${i}`,
             description: faker.lorem.sentences(3),
-            price: faker.random.number({min:0, max:2, precision:0}),
-            postedBy: faker.name.findName(),
+            budget: faker.random.number({min:5, max:2000}),
+            postedBy: {
+                firstName: faker.name.firstName(),
+                lastName: faker.name.lastName()
+            },
             date: faker.date.future(),
             time: getTime(faker.random.number(4)),
             location: {
@@ -70,5 +71,5 @@ iterateSeries(tasks, (i, callback) => {
             },
             status: getStatus(i % 3),
             createdAt: Date.now()
-        }).then(() => { callback() })
+        }).then(() => { callback() }).catch((err) => {console.log(err)})
 })

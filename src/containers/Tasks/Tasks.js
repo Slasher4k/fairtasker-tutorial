@@ -18,6 +18,10 @@ function initDataLoad() {
     })
 }
 
+function loadTask(taskId) {
+    return axios.get(`tasks/${taskId}.json`)
+}
+
 class Tasks extends Component {
     state = {
         hasMore: true,
@@ -28,9 +32,26 @@ class Tasks extends Component {
     }
 
     componentDidMount(){
-        initDataLoad().then(({data:tasks}) => {
-            const  tasksArray = Object.entries(tasks).reverse();
-            this.setState({tasks: tasksArray})
+      
+        const promises = [initDataLoad()];
+        const { taskId } = this.props.match.params;
+
+        if (taskId) {
+            promises.push(loadTask(taskId))
+        }
+
+        Promise.all(promises).then((responses) => {
+            console.log(responses)
+            const { data: tasks } = responses[0];
+            const tasksArray = Object.entries(tasks).reverse();
+            const taskIds = tasksArray.map(([id]) => id)
+            const newState = { tasks: tasksArray, taskIds };
+
+            if (responses.length === 2) {
+                newState.selectedTask = responses[1].data
+            }
+
+            this.setState(newState);
         })
     }
 
@@ -40,11 +61,12 @@ class Tasks extends Component {
         const { taskId } = this.props.match.params;
         
         if (previousId !== taskId){
-            const { tasks } = this.state;
             let selectedTask = null;
-
+            
             if (taskId) {
-                selectedTask = tasks[taskId]
+                const { tasks, taskIds } = this.state;
+                let taskIndex = taskIds.findIndex(id => id === taskId);
+                selectedTask = tasks[taskIndex][1];
             }
 
             this.setState({ selectedTask })
